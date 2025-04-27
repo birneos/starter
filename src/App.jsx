@@ -18,16 +18,43 @@ const App = () => {
     return number
   }
 
+  /** Nächste Person mit normaler Logik */
   const nextBtn = () => {
     setIndex((currentIndex) => {
       const newIndex = currentIndex + 1
       return checkNumber(newIndex)
     })
   }
+
+  /** Voherige Person mit normaler Logik */
   const prevBtn = () => {
     setIndex((currentIndex) => {
       const newIndex = currentIndex - 1
       return checkNumber(newIndex)
+    })
+  }
+
+  /**
+   * console.log( 1 % 4)
+   * console.log( 2 % 4)
+   * console.log( 3 % 4)
+   * console.log( 4 % 4)
+   * console.log( 10 % 4)
+   */
+
+  /** Nächste Person mit Modulo Logik */
+  const nextBtnModulo = () => {
+    setIndex((currentIndex) => {
+      const newIndex = (currentIndex + 1) % people.length
+      return newIndex
+    })
+  }
+
+  /** Voherige Person mit Modulo Logik */
+  const prevBtnModulo = () => {
+    setIndex((currentIndex) => {
+      const newIndex = (currentIndex - 1 + people.length) % people.length
+      return newIndex
     })
   }
 
@@ -38,7 +65,20 @@ const App = () => {
       randomNumber = index + 1
     }
 
+    /* Normale Logik mit checkNumber */
     setIndex(checkNumber(randomNumber))
+  }
+
+  /* Alternative mit Modulo wäre */
+  const randomPersonModulo = () => {
+    let randomNumber = Math.floor(Math.random() * people.length - 1)
+
+    if (randomNumber === index) {
+      randomNumber = index + 1
+    }
+
+    const newIndex = randomNumber % people.length
+    setIndex(newIndex)
   }
 
   return (
